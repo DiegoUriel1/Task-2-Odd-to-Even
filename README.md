@@ -2,6 +2,47 @@
 
 This repository contains a Python implementation of a quantum algorithm that transforms odd numbers within a given range into even numbers, while ensuring that the transformed numbers remain within the same range. The algorithm leverages the principles of quantum computing and the unary encoding scheme to perform the transformation efficiently.
 
+## Requirements
+
+- Python 3.10.4
+- Qiskit 0.39.2
+- NumPy 1.23.5
+- Matplotlib 3.6.2 (optional, for visualizing the results)
+
+## Installation
+
+1. Create a new virtual environment (recommended):
+python -m venv odd_to_even_env
+
+
+2. Activate the virtual environment:
+
+- On Windows:
+  ```
+  odd_to_even_env\Scripts\activate
+  ```
+- On macOS/Linux:
+  ```
+  source odd_to_even_env/bin/activate
+  ```
+
+3. Install the required packages:
+pip install qiskit==0.39.2 numpy==1.23.5 matplotlib==3.6.2
+
+## Usage
+
+1. Run the script:
+python odd_to_even.py
+
+
+This will execute the `odd_to_even()` function with a default example input and print the transformed output.
+
+2. Customize the input:
+
+You can modify the `n` and `list_numbers` variables in the script to use your own input.
+
+
+
 ## Mathematical Foundation
 
 Let `x` be an odd number in the range `[1, n)`, where `n` is a power of 2 (`n = 2^k`). The transformation function `f(x)` that converts `x` into a nearby even number can be defined as follows:
@@ -81,6 +122,7 @@ def odd_to_even(n, list_numbers):
     
     return output
 
+
 # Example usage
 n = 31
 list_numbers = [1, 2, 2, 4, 5, 6, 7, 11, 17, 21, 22, 23]
@@ -146,3 +188,4 @@ The mathematical foundation of the algorithm is based on the unary encoding and 
 3. **Quantum Gates**: Instead of using the X gate, you could explore the use of other quantum gates or a combination of gates to perform the transformation. This could potentially lead to more efficient or specialized transformations.
 
 4. **Optimization Techniques**: You could apply various optimization techniques, such as circuit simplification, gate cancellation, or quantum error correction, to improve the performance or reliability of the algorithm.
+
