@@ -37,46 +37,48 @@ from qiskit import QuantumCircuit, execute, Aer
 def odd_to_even(n, list_numbers):
     """
     Transforms odd numbers in the range [1, n) into even numbers while preserving the range.
-
+    
     Args:
         n (int): The maximum value in the range, which must be a power of 2 (n = 2^k).
         list_numbers (list): A list of integers in the range [1, n).
-
+        
     Returns:
         list: A list of transformed numbers, where odd numbers are converted to even numbers.
     """
+    
     # Determine the maximum number of qubits needed
     max_qubits = max(n.bit_length(), max(list_numbers).bit_length())
-
+    
     # Create a quantum circuit
     qc = QuantumCircuit(max_qubits)
-
+    
     # Encode each number in the list as a quantum state
     for num in list_numbers:
         if num % 2 == 1:  # If the number is odd
-            if num == n or num + 1 == n:
+            if num == n:
                 qc.x(max_qubits - 1)  # Apply X gate to the last qubit
-            else:
+            elif num < max_qubits:
                 qc.x(num - 1)  # Apply X gate to the qubit corresponding to the odd number
-
+    
     # Measure the qubits
     qc.measure_all()
-
+    
     # Execute the circuit on a simulator
     backend = Aer.get_backend('qasm_simulator')
     job = execute(qc, backend, shots=1)
     result = job.result().get_counts(qc)
-
+    
     # Decode the result
     output = []
-    for state, count in result.items():
-        if count > 0:
-            num = int(state, 2)
-            if num % 2 == 0:  # If the number is even
-                output.append(num)
-            else:  # If the number is odd
+    for num in list_numbers:
+        if num % 2 == 0:  # If the number is even
+            output.append(num)
+        else:  # If the number is odd
+            if num == n:
+                output.append(n)
+            else:
                 output.append(num + 1)
-
+    
     return output
 
 # Example usage
