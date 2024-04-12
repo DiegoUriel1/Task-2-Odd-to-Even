@@ -85,6 +85,7 @@ list_numbers = [1, 2, 2, 4, 5, 6, 7, 11, 17, 21, 22, 23]
 result = odd_to_even(n, list_numbers)
 print(result)
 
+
 Requirements
 Python 3.x
 Qiskit library
